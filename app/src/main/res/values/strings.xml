@@ -1,0 +1,92 @@
+<resources>
+    <string name="app_name">LifeLine</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="welcome_to_lifeline">Welcome to</string>
+    <string name="google_signin_icon">google signin icon</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+
+    <string name="progress_dialog_default_string">Loading</string>
+    <string name="buyer">Buyer</string>
+    <string name="seller">Seller</string>
+    <string name="preferences">Preferences</string>
+    <string name="i_am_with">I am with…</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="birthdate">Birthdate</string>
+    <string name="I_was_born_at">I was born at</string>
+    <string name="years_old">years old</string>
+    <string name="title_register">Register</string>
+    <string name="title_my_menu">My Menu</string>
+    <string name="_4_5_stars">4/5 Stars</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,</string>
+    <string name="location">Location</string>
+    <string name="cuisine">Cuisine</string>
+    <string name="contains">Contains</string>
+    <string name="peanuts">Peanuts</string>
+    <string name="city">City</string>
+    <string name="title_order_details">Order Details</string>
+    <string name="from">From</string>
+    <string name="general_information">General information</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="up_to_200_words">(Up to 200 words)</string>
+    <string name="images_up_to_5">Images (up to 5)</string>
+    <string name="click_the_button_to_add">Click the + button to add a listing to your calendar. Buyers will only be able to order from you when you are available</string>
+    <string name="add_a_listing">Add a listing</string>
+    <string name="every">Every</string>
+    <string name="between">between</string>
+    <string name="and">and</string>
+    <string name="title_add_meal">Add Meal</string>
+    <string name="price_no_colon">Price</string>
+    <string name="done">Done</string>
+    <string name="sunday">Sunday</string>
+    <string name="to">to</string>
+    <string name="payment_confirmation_intent">paymentConfirmationIntent</string>
+    <string name="logout">Logout</string>
+    <string name="title_profile_fragment">Account</string>
+    <string name="save_meal">Save meal</string>
+    <string name="updating_meal">Updating your meal</string>
+    <string name="creating_meal">Creating your meal</string>
+    <string name="order">Order</string>
+    <string name="short_description">Short description</string>
+    <string name="this_is_the_first_description_the_buyer_sees_be_concise">This is the first description the buyer sees. be concise!</string>
+    <string name="google_places_api">AIzaSyD-wMoZ8HgOh5p5M0joZoPe1oFl_C3JxNY</string>
+    <string name="google_static_map_api_key">AIzaSyC4Fr9pfUEF8PdcF3C4MjRTvrP9psUbfB8</string>
+    <string name="title_attributions">Attributions</string>
+    <string name="completed">Completed</string>
+    <string name="channel_name_general">General</string>
+    <string name="channel_description_general">General Notifications</string>
+    <string name="action_copy">Copy</string>
+    <string name="action_delete">Delete</string>
+    <string name="start_typing_status">Start typing</string>
+    <string name="stop_typing_status">Stop typing</string>
+    <string name="copied_message">Message copied</string>
+    <string name="title_chat">Chat</string>
+    <string name="inbox">Inbox</string>
+    <string name="title_inbox_fragment">Inbox</string>
+    <string name="about_the_chef">About the chef</string>
+    <string name="message_the_chef">Send a message</string>
+    <string name="chat">Chat</string>
+    <string name="orders_caps">Orders</string>
+    <string name="saved_user_key" translatable="false">savedUserKey</string>
+    <string name="new_order">New order!</string>
+    <string name="accept">ACCEPT</string>
+    <string name="decline">DECLINE</string>
+    <string name="status">Status</string>
+    <string name="due_date">Due date</string>
+    <string name="buyer_information">Buyer information</string>
+    <string name="order_completed">Order Completed</string>
+    <string name="no_comments">No comments.</string>
+    <string name="ems">EMS</string>
+    <string name="hospital">Hospital</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="credentials">Credentials</string>
+    <string name="hospital_name">Hospital Name</string>
+    <string name="login">Login</string>
+
+
+</resources>

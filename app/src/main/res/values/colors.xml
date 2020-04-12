@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#D07857</color>
+    <color name="colorPrimaryLight">#d08568</color>
+    <color name="colorAccent">#B63E51</color>
+    <color name="white">#FFFFFF</color>
+    <color name="darkGreen">#388E3C</color>
+    <color name="lightGrey">#EDEDED</color>
+    <color name="grey">#646464</color>
+    <color name="captionTextColor">#666666</color>
+    <color name="black">#000000</color>
+    <color name="dark_white">#f5f5f5</color>
+    <color name="darkGrey">#757575</color>
+
+    <color name="orderCompleted">#417505</color>
+    <color name="orderCancelled">#d0021b</color>
+    <color name="orderPending">#defeb12f</color>
+    <color name="orderInProgress">#d89204</color>
+
+    <color name="rustyRed">#bf360c</color>
+    <color name="darkishGreen">#2e7d32</color>
+    <color name="mango">#defeb12f</color>
+</resources>
