@@ -90,6 +90,8 @@
     <string name="bpm">BPM</string>
     <string name="oxyger">Oxyger</string>
     <string name="oxygen_percent">Oxygen Percent</string>
+    <string name="new_patient">New Patient</string>
+    <string name="add_patient">Add Patient</string>
 
 
 </resources>

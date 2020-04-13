@@ -44,7 +44,7 @@ public class PatientDetailsActivity extends AppCompatActivity {
         bpmValueText.setText(String.format(Locale.ENGLISH,"%d/minute", patient.getBpm()));
         String oxi = String.format(Locale.ENGLISH,"%d", patient.getOxygenPercentage()) + "%";
         oxiValueText.setText(oxi);
-        statusText.setText(patient.getStatus());
+        statusText.setText(patient.getStatusText());
 
     }
 

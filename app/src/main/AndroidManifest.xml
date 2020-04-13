@@ -10,8 +10,9 @@
         android:screenOrientation="sensorPortrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Base">
-        <activity android:name=".PatientDetailsActivity"></activity>
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".AddPatientActivity"></activity>
+        <activity android:name=".PatientDetailsActivity" />
+        <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

@@ -59,10 +59,22 @@ public class MainFragment extends Fragment {
 
     private List<Patient> getItems() {
         List<Patient> list = new ArrayList<>();
-        list.add(new Patient("patient 0", 32, "dead", 0, 10));
-        list.add(new Patient("patient 1", 32, "on his way", 100, 95));
-        list.add(new Patient("patient 2", 32, "delivered ot hospial", 60, 90));
+        //list.add(new Patient("patient 0", 32, "dead", 0, 10));
+        //list.add(new Patient("patient 1", 32, "on his way", 100, 95));
+        //list.add(new Patient("patient 2", 32, "delivered ot hospial", 60, 90));
         return list;
+    }
+
+    public void setPatients(List<Patient> items) {
+        this.items = items;
+        //pullToRefresh.setRefreshing(false);
+        recyclerAdapter.notifyDataSetChanged();
+
+//        if (items.isEmpty()) {
+//            showEmptyState();
+//        } else {
+//            hideEmptyState();
+//        }
     }
 
     @Override
@@ -86,7 +98,7 @@ public class MainFragment extends Fragment {
             Patient patient = items.get(position);
 
             holder.patientsNameText.setText(patient.getName());
-            holder.statusText.setText(patient.getStatus());
+            holder.statusText.setText(patient.getStatusText());
             holder.itemView.setOnClickListener( v -> {
                 startActivity(PatientDetailsActivity.patientDetailIntent(getContext(),items.get(position)));
             });

@@ -3,7 +3,7 @@ package com.example.lifeline.model;
 public class Patient extends BaseModel {
     private String name;
     private int age;
-    private String status;
+    private Status status;
     private int oxygenPercentage;
     private int bpm;
 
@@ -19,7 +19,7 @@ public class Patient extends BaseModel {
         DELIVERED
     }
 
-    public Patient(String name, int age, String status,int bpm,  int oxygenPercentage){
+    public Patient(String name, int age, Status status,int bpm,  int oxygenPercentage){
         this.name = name;
         this.age = age;
         this.status = status;
@@ -33,7 +33,7 @@ public class Patient extends BaseModel {
         return this.name;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return this.status;
     }
 
@@ -43,5 +43,20 @@ public class Patient extends BaseModel {
 
     public int getOxygenPercentage() {
         return this.oxygenPercentage;
+    }
+
+    public String getStatusText(){
+        switch(this.status){
+            case GOOD:
+                return "Good";
+            case MILD:
+                return "Mild";
+            case CRITICAL:
+                return "Critical";
+            case RESPIRATED:
+                return "Respirated";
+            default:
+                return "Undetermined";
+        }
     }
 }
