@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PatientDetailsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/detail_patients_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/AppTheme.Text.Title"
+            android:text="Patient0"
+            android:textColor="@color/colorPrimary"
+            android:textSize="100dp"
+            android:layout_marginTop="30dp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/detail_patients_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.Text.Subtitle"
+            android:text="Dead"
+            android:textSize="40dp"
+            android:textColor="@color/rustyRed"
+            android:layout_marginTop="@dimen/generic_screen_vertical_spacing"
+            android:layout_marginStart="@dimen/generic_screen_horizontal_spacing"
+            android:layout_marginLeft="@dimen/generic_screen_horizontal_spacing" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/detail_bpm_layout"
+            android:padding="2dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/detail_bpm_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/AppTheme.Text.Subtitle"
+                android:text="@string/bpm"
+                android:textColor="@color/black"
+                android:textSize="30dp"
+                android:layout_marginTop="@dimen/generic_screen_vertical_spacing"
+                android:layout_marginStart="@dimen/generic_screen_horizontal_spacing"
+                android:layout_marginLeft="@dimen/generic_screen_horizontal_spacing" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/detail_bpm_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/AppTheme.Text.Subtitle"
+                android:text="100"
+                android:textColor="@color/rustyRed"
+                android:textSize="30dp"
+                android:layout_marginTop="@dimen/generic_screen_vertical_spacing"
+                android:layout_marginEnd="@dimen/generic_screen_horizontal_spacing"
+                android:layout_marginRight="@dimen/generic_screen_horizontal_spacing" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/detail_oxi_layout"
+            android:padding="2dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/detail_oxi_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/AppTheme.Text.Subtitle"
+                android:text="@string/oxygen_percent"
+                android:textColor="@color/black"
+                android:textSize="30dp"
+                android:layout_marginTop="@dimen/generic_screen_vertical_spacing"
+                android:layout_marginStart="@dimen/generic_screen_horizontal_spacing"
+                android:layout_marginLeft="@dimen/generic_screen_horizontal_spacing" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/detail_oxi_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/AppTheme.Text.Subtitle"
+                android:text="100%"
+                android:textColor="@color/rustyRed"
+                android:textSize="30dp"
+                android:layout_marginTop="@dimen/generic_screen_vertical_spacing"
+                android:layout_marginEnd="@dimen/generic_screen_horizontal_spacing"
+                android:layout_marginRight="@dimen/generic_screen_horizontal_spacing" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

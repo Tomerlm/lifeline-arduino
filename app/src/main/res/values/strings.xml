@@ -87,6 +87,9 @@
     <string name="credentials">Credentials</string>
     <string name="hospital_name">Hospital Name</string>
     <string name="login">Login</string>
+    <string name="bpm">BPM</string>
+    <string name="oxyger">Oxyger</string>
+    <string name="oxygen_percent">Oxygen Percent</string>
 
 
 </resources>
