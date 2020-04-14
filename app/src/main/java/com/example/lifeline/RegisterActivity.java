@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -21,6 +22,8 @@ import butterknife.OnClick;
 
 
 public class RegisterActivity extends AppCompatActivity {
+
+    private LDataAccessLayer dal = new LDataAccessLayer(this);
 
     @BindView(R.id.hospital_name_textInputLayout)
     TextInputLayout hospitalNameTIL;
@@ -67,9 +70,25 @@ public class RegisterActivity extends AppCompatActivity {
 
     @OnClick(R.id.register_confirm)
     void onConfirmRegister(){
-        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-        startActivity(intent);
-        finish();
+        String email = emailET.getText().toString();
+        String password = passwordET.getText().toString();
+        String hospital = hospitalNameET.getText().toString();
+        String username = "username";
+        if(password.length() < 6){
+            Toast.makeText(this, "Password should be at least 6 charecters.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        dal.register(email, password, this.isEms, username, hospital, wrapper -> {
+            if(wrapper.success()){
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+            else{
+                Toast.makeText(this, "Error registering", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @OnClick(R.id.register_ems_linear_Layout)
