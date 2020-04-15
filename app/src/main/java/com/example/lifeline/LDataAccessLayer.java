@@ -182,7 +182,7 @@ public class LDataAccessLayer implements DataAccessLayer {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
-                                Patient patient = document.toObject(Patient.class);
+                                Patient patient = document.toObject(Patient.class).withId(document.getId());
                                 items.add(patient);
                             }
                             callback.onData(DataWrapper.with(items));

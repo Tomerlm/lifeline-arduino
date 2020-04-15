@@ -12,13 +12,13 @@ import * as functions from 'firebase-functions';
 const admin = require('firebase-admin');
 admin.initializeApp();
 
-const PATIENTS_COLLECTION = "patients";
+ const PATIENTS_COLLECTION = "patients";
 
 exports.updatePatientParameters = functions.https.onRequest(async(req, res) => {
-    const bpm = req.query.bpm;
-    const oxi = req.query.oxi;
+    const bpm = parseInt(req.query.bpm as any);
+    const oxi = parseInt(req.query.oxi as any);
     const patientID = req.query.id;
 
     const writeResult = await admin.firestore().collection(PATIENTS_COLLECTION).doc(patientID).update({bpm: bpm, oxygenPercentage: oxi });
-    res.json({result: writeResult});
+    res.json({result: writeResult, check: 1});
 });

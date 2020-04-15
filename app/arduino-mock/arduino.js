@@ -13,7 +13,7 @@ loop()
 const updatePatient = () => {
     let bpm = randInRange(60, 120);
     let oxi = randInRange(70, 100);
-    let id = 'FzGgf7uPQBdMUKfofbvc'
+    let id = 'N06ZHtEn5k88fH6Z1Eg9'
     let url = `https://us-central1-lifeline-aa56b.cloudfunctions.net/updatePatientParameters?id=${id}&bpm=${bpm}&oxi=${oxi}`
     https.get(url, (resp) => {
       let data = '';

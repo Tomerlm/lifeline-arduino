@@ -5,11 +5,14 @@ import androidx.annotation.NonNull;
 // import com.google.firebase.firestore.Exclude;
 // import com.google.firebase.firestore.IgnoreExtraProperties;
 
+import com.google.firebase.firestore.Exclude;
+import com.google.firebase.firestore.IgnoreExtraProperties;
+
 import java.io.Serializable;
 
-//@IgnoreExtraProperties
+@IgnoreExtraProperties
 public abstract class BaseModel implements Serializable {
-    //@Exclude
+    @Exclude
     public String id;
 
     public <T extends BaseModel> T withId(@NonNull final String id) {
@@ -17,7 +20,7 @@ public abstract class BaseModel implements Serializable {
         return (T) this;
     }
 
-    //@Exclude
+    @Exclude
     public String getId() {
         return id;
     }
