@@ -96,6 +96,7 @@ public class RegisterActivity extends AppCompatActivity {
         updateUserType(false);
     }
     public void updateUserType(boolean isEmsPressed) {
+
         int colorChecked = ContextCompat.getColor(this, R.color.colorPrimary);
         int colorUnchecked = ContextCompat.getColor(this, R.color.grey);
         int emsColor, hospitalColor;
@@ -114,9 +115,7 @@ public class RegisterActivity extends AppCompatActivity {
         hospitalTextView.setTextColor(hospitalColor);
         hospitalIcon.setColorFilter(hospitalColor);
 
-
-
-        //hospitalNameTIL.setVisibility(isEmsPressed? View.INVISIBLE : View.VISIBLE);
+        hospitalNameET.setText("");
         hospitalNameTIL.setHint(isEmsPressed ? "Arduino ID" : "Hospital Name");
 
         isEms = isEmsPressed;
