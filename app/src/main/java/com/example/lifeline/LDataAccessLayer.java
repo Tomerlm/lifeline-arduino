@@ -249,5 +249,19 @@ public class LDataAccessLayer implements DataAccessLayer {
         }
     }
 
+    @Override
+    public void setArduinoID(String arduinoID, DataCallback<User> callback){
+        if(currentUser == null){
+            Log.e(TAG, "Error no user");
+           return;
+        }
+        currentUser.setArduinoID(arduinoID);
+        db.collection(COLLECTION_USERS)
+                .document(currentUser.getId())
+                .update("arduinoID", arduinoID)
+                .addOnSuccessListener(aVoid -> callback.onData(DataWrapper.with(null)))
+                .addOnFailureListener(err -> callback.onData(DataWrapper.exception(err)));
+    }
+
 
 }

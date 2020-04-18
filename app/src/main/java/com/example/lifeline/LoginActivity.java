@@ -38,12 +38,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel model;
 
-    @BindView(R.id.email_edittext)
-    TextInputEditText emailEditText;
-
-    @BindView(R.id.password_edittext)
-    TextInputEditText passEditText;
-
     @BindView(R.id.login_btn)
     MaterialButton loginButton;
 
@@ -85,42 +79,6 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(intent);
         finish();
-    }
-
-//    @OnClick(R.id.login_btn)
-//    void onLoginBtnClicked(){
-//        //TODO: firebase auth
-//        String email = emailEditText.getText().toString();
-//        String password = passEditText.getText().toString();
-//        if(email == null || email.equals("") || password == null || password.equals("")){
-//            Toast.makeText(this, "Fields cannot be empty", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//        dal.login(email, password, wrapper -> {
-//            if (wrapper.success()) {
-//                startNextActivity();
-//            } else {
-//                Log.e(TAG, wrapper.getException().toString());
-////                if(wrapper.getException().getCause().equals("Bad Input")){
-////                    Toast.makeText(this, "Input cannot be empty", Toast.LENGTH_SHORT).show();
-////                    return;
-////                }
-//
-//                Toast.makeText(this, "Error with login. check your credentials.", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-////        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-////        String text = passEditText.getText().toString();
-////        if(passEditText.getText().toString().equals("1")){
-////            intent = new Intent(LoginActivity.this, MainActivity.class);
-////        }
-////        startActivity(intent);
-////        finish();
-//    }
-
-    @OnClick(R.id.register_btn)
-    void onRegisterBtnClick() {
-        moveToRegisterActivity();
     }
 
     @SuppressWarnings("unused")
@@ -176,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
         dal.findUserByEmail(email, wrapper -> {
             Intent intent;
             if (wrapper.success()) {
-                intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent = new Intent(LoginActivity.this, ArduinoidActivity.class);
             } else {
                 Log.d(TAG, "Error getting user: " + wrapper.getException());
                 intent = new Intent(LoginActivity.this, RegisterActivity.class);

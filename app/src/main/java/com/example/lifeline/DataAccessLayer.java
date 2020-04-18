@@ -29,4 +29,6 @@ public interface DataAccessLayer {
     void getAllPatients(DataCallback<List<Patient>> callback);
 
     public void sendRegistrationTokenToServer(String token, DataCallback<Void> cb);
+
+    public void setArduinoID(String arduinoID, DataCallback<User> callback);
 }

@@ -19,15 +19,12 @@ public class User extends BaseModel {
         this.currentPatient = "";
     }
 
-    public User(FirebaseUser fbUser, boolean isEms, String username, String hospitalNameOrArduinoId) {
+    public User(FirebaseUser fbUser, boolean isEms, String username, String hospitalName) {
         this.email = fbUser.getEmail();
         this.isEms = isEms;
         this.username = username;
         if(!isEms) {
-            this.hospitalName = hospitalNameOrArduinoId;
-        }
-        else{
-            this.arduinoID = hospitalNameOrArduinoId;
+            this.hospitalName = hospitalName;
         }
     }
 

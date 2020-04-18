@@ -75,7 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         dal.register(firebaseUser, this.isEms, username, hospitalOrArdID, wrapper -> {
             if(wrapper.success()){
-                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                Intent intent = new Intent(RegisterActivity.this, ArduinoidActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -115,8 +115,7 @@ public class RegisterActivity extends AppCompatActivity {
         hospitalTextView.setTextColor(hospitalColor);
         hospitalIcon.setColorFilter(hospitalColor);
 
-        hospitalNameET.setText("");
-        hospitalNameTIL.setHint(isEmsPressed ? "Arduino ID" : "Hospital Name");
+        hospitalNameTIL.setVisibility(isEmsPressed ? View.INVISIBLE : View.VISIBLE);
 
         isEms = isEmsPressed;
     }
