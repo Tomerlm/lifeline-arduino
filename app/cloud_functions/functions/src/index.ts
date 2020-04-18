@@ -20,5 +20,5 @@ exports.updatePatientParameters = functions.https.onRequest(async(req, res) => {
     const patientID = req.query.id;
 
     const writeResult = await admin.firestore().collection(PATIENTS_COLLECTION).doc(patientID).update({bpm: bpm, oxygenPercentage: oxi });
-    res.json({result: writeResult, check: 1});
+    res.json({result: writeResult});
 });

@@ -4,7 +4,7 @@ const loop = () => {
     setInterval(async () =>{
         console.log("updating...")
         await updatePatient()
-    }, 1000)
+    }, 10000)
 }
 
 loop()

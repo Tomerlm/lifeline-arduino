@@ -33,7 +33,7 @@ public class MainFragment extends Fragment {
 
     private RecyclerView.Adapter recyclerAdapter = new PatientsRecyclerAdapter();
 
-    private List<Patient> items;
+    private List<Patient> items = new ArrayList<>();
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -52,7 +52,8 @@ public class MainFragment extends Fragment {
 
         patientsRecycler.setAdapter(recyclerAdapter);
         patientsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        items = getItems();
+
+       // items = getItems();
 
         return view;
     }

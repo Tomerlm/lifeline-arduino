@@ -31,14 +31,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/generic_screen_vertical_spacing"
-                android:text="@string/preferences" />
+                android:text="@string/register" />
 
             <TextView
                 style="@style/AppTheme.Text.Subtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/generic_screen_vertical_spacing"
-                android:text="@string/i_am_with"
+                android:text="@string/what_are_you"
                 android:textColor="@color/captionTextColor" />
 
 
@@ -126,7 +126,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="@string/credentials" />
+                android:text="@string/details" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -134,23 +134,7 @@
                 android:layout_marginTop="@dimen/generic_screen_vertical_spacing"
                 android:orientation="horizontal">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/email_field_layout"
-                    style="@style/AppTheme.EditText.FilledBox"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/email">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/email_edittext"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:maxLines="1"
-                        android:inputType="textEmailAddress"
-                        android:textColor="@color/black" />
-
-                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/password_layout"
@@ -158,14 +142,14 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
+                    android:layout_marginLeft="2dp"
                     android:layout_marginStart="12dp"
                     android:maxLines="1"
                     android:inputType="text"
-                    android:hint="@string/password">
+                    android:hint="@string/name">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/password_edittext"
+                        android:id="@+id/username_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:maxLines="1"

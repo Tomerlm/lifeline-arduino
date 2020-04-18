@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import butterknife.ButterKnife;
 import butterknife.BindView;
@@ -31,11 +33,9 @@ public class RegisterActivity extends AppCompatActivity {
     @BindView(R.id.hospital_name_edittext)
     TextInputEditText hospitalNameET;
 
-    @BindView(R.id.email_edittext)
-    TextInputEditText emailET;
 
-    @BindView(R.id.password_edittext)
-    TextInputEditText passwordET;
+    @BindView(R.id.username_edittext)
+    TextInputEditText usernameET;
 
     @BindView(R.id.register_ems_linear_Layout)
     LinearLayout emsLL;
@@ -65,22 +65,17 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
-        hospitalNameTIL.setVisibility(View.INVISIBLE);
+        //hospitalNameTIL.setVisibility(View.INVISIBLE);
     }
 
     @OnClick(R.id.register_confirm)
     void onConfirmRegister(){
-        String email = emailET.getText().toString();
-        String password = passwordET.getText().toString();
-        String hospital = hospitalNameET.getText().toString();
-        String username = "username";
-        if(password.length() < 6){
-            Toast.makeText(this, "Password should be at least 6 charecters.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        dal.register(email, password, this.isEms, username, hospital, wrapper -> {
+        String username = usernameET.getText().toString();
+        String hospitalOrArdID = hospitalNameET.getText().toString();
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        dal.register(firebaseUser, this.isEms, username, hospitalOrArdID, wrapper -> {
             if(wrapper.success()){
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -121,7 +116,8 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-        hospitalNameTIL.setVisibility(isEmsPressed? View.INVISIBLE : View.VISIBLE);
+        //hospitalNameTIL.setVisibility(isEmsPressed? View.INVISIBLE : View.VISIBLE);
+        hospitalNameTIL.setHint(isEmsPressed ? "Arduino ID" : "Hospital Name");
 
         isEms = isEmsPressed;
     }

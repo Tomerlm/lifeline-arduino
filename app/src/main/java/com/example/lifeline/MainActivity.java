@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.lifeline.model.Patient;
+import com.example.lifeline.model.User;
 import com.example.lifeline.ui.main.MainFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements DataCallback<List
 
     DataAccessLayer dal = new LDataAccessLayer(this);
 
+    User currentUser;
+
     MainFragment mainFragment;
 
     @BindView(R.id.progress_bar)
@@ -43,6 +46,10 @@ public class MainActivity extends AppCompatActivity implements DataCallback<List
         setContentView(R.layout.main_activity);
         ButterKnife.bind(this);
         progressBar.setVisibility(View.INVISIBLE);
+        currentUser = dal.getCurrentUser();
+        if(!currentUser.isEms()){
+            addPatientButton.setVisibility(View.INVISIBLE);
+        }
         dal.getAllPatients(this);
         if (savedInstanceState == null) {
             mainFragment = MainFragment.newInstance();

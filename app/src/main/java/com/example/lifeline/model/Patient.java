@@ -2,35 +2,11 @@ package com.example.lifeline.model;
 
 public class Patient extends BaseModel {
     private String name;
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public void setOxygenPercentage(int oxygenPercentage) {
-        this.oxygenPercentage = oxygenPercentage;
-    }
-
-    public void setBpm(int bpm) {
-        this.bpm = bpm;
-    }
-
     private int age;
     private Status status;
     private int oxygenPercentage;
     private int bpm;
+    //private List<Vitals> vitals;
 
     public enum Status{
         GOOD,
@@ -91,5 +67,28 @@ public class Patient extends BaseModel {
             default:
                 return "Undetermined";
         }
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public void setOxygenPercentage(int oxygenPercentage) {
+        this.oxygenPercentage = oxygenPercentage;
+    }
+
+    public void setBpm(int bpm) {
+        this.bpm = bpm;
     }
 }

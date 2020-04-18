@@ -2,6 +2,7 @@ package com.example.lifeline;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
@@ -11,6 +12,9 @@ import androidx.annotation.NonNull;
 import com.example.lifeline.model.BaseModel;
 import com.example.lifeline.model.Patient;
 import com.example.lifeline.model.User;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -41,7 +45,7 @@ public class LDataAccessLayer implements DataAccessLayer {
     private static final String COLLECTION_USERS = "users";
     private static final String COLLECTION_PATIENTS = "patients";
 
-    private static FirebaseUser currentUser = null;
+    private static User currentUser = null;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -58,14 +62,14 @@ public class LDataAccessLayer implements DataAccessLayer {
         return DataWrapper.with(doc.toObject(clazz).withId(doc.getId()));
     }
 
-    public FirebaseUser getCurrentUser() {
+    public User getCurrentUser() {
         Context ctx = contextRef.get();
         if (currentUser == null && ctx != null) {
             SharedPreferences prefs = ctx.getSharedPreferences(LDataAccessLayer.class.getSimpleName(), Context.MODE_PRIVATE);
             String userJson = prefs.getString("user", null);
             if (userJson == null) return null;
 
-            currentUser = gson.fromJson(userJson, FirebaseUser.class);
+            currentUser = gson.fromJson(userJson, User.class);
         }
         return currentUser;
     }
@@ -95,8 +99,42 @@ public class LDataAccessLayer implements DataAccessLayer {
                 });
     }
 
+    @Override
+    public void mLogin(DataCallback<User> callback) {
+        if (currentUser != null) {
+            callback.onData(DataWrapper.with(currentUser));
+            return;
+        }
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        if (firebaseUser != null) {
+            findUserByEmail(firebaseUser.getEmail(), wrapper -> {
+                if (wrapper.success()) {
+                    currentUser = wrapper.get();
+                    Context context = contextRef.get();
+                    if (context != null) {
+                        SharedPreferences prefs = context.getSharedPreferences(LDataAccessLayer.class.getSimpleName(), Context.MODE_PRIVATE);
+                        String userJson = gson.toJson(currentUser, User.class);
+                        prefs.edit().putString("user", userJson).apply();
+                    }
+                    FirebaseInstanceId.getInstance()
+                            .getInstanceId()
+                            .addOnSuccessListener(instanceIdResult -> {
+                                String token = instanceIdResult.getToken();
+                                sendRegistrationTokenToServer(token, null);
+                            });
+
+                    callback.onData(DataWrapper.with(wrapper.get()));
+                } else {
+                    callback.onData(DataWrapper.exception(wrapper.getException()));
+                }
+            });
+        } else {
+            callback.onData(DataWrapper.exception(new Exception("User not logged in with firebase")));
+        }
+    }
+
     public void findUserByEmail(String email, DataCallback<User> callback){
-        db.collection(COLLECTION_PATIENTS)
+        db.collection(COLLECTION_USERS)
                 .whereEqualTo("email", email)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
@@ -139,23 +177,20 @@ public class LDataAccessLayer implements DataAccessLayer {
 
 
     @Override
-    public void register(String email, String password, boolean isEms, String username, String hospitalName, DataCallback<FirebaseUser> callback) {
+    public void register(FirebaseUser fbUser, boolean isEms, String username, String hospitalName, DataCallback<User> callback) {
         Context ctx = contextRef.get();
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener((Activity) ctx, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            currentUser = firebaseAuth.getCurrentUser();
-                            callback.onData(DataWrapper.with(currentUser));
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            callback.onData(DataWrapper.exception(task.getException()));}
-                    }
-                });
+        User user = new User(fbUser, isEms, username, hospitalName);
+        db.collection(COLLECTION_USERS)
+                .add(user)
+                .addOnSuccessListener(docRef -> {
+                    docRef.get().addOnSuccessListener(doc -> {
+                        currentUser = doc.toObject(User.class).withId(doc.getId());
+                        callback.onData(DataWrapper.with(currentUser));
+
+                    }).addOnFailureListener(e -> callback.onData(DataWrapper.exception(e)));
+                }).addOnFailureListener(e -> {
+            callback.onData(DataWrapper.exception(e));
+        });
     }
 
     @Override
@@ -192,6 +227,26 @@ public class LDataAccessLayer implements DataAccessLayer {
                         }
                     }
                 });
+    }
+
+    @Override
+    public void sendRegistrationTokenToServer(String token, DataCallback<Void> cb) {
+        final DataCallback<Void> callback = cb == null ? (aVoid) -> {} : cb;
+        if (token == null) {
+            callback.onData(DataWrapper.with(null));
+            return;
+        }
+
+        if (currentUser != null) {
+            db.collection(COLLECTION_USERS)
+                    .document(currentUser.getId())
+                    .update("registrationToken", token)
+                    .addOnSuccessListener(aVoid -> callback.onData(DataWrapper.with(null)))
+                    .addOnFailureListener(err -> callback.onData(DataWrapper.exception(err)));
+        } else {
+            // Cache the token for when the user logs in
+            callback.onData(DataWrapper.with(null));
+        }
     }
 
 
