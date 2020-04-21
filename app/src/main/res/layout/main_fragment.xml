@@ -13,7 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="MainDashboard"
+        android:text="Dashboard"
+        android:textColor="@color/colorPrimary"
+        style="@style/AppTheme.Text.Title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +26,8 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="@id/dashboard"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="80dp">
 
     </androidx.recyclerview.widget.RecyclerView>
 

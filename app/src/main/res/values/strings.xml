@@ -47,5 +47,7 @@
     <string name="lifeline_id">Lifeline ID</string>
     <string name="hi_username">Hi {username}!</string>
     <string name="enter_your_lifeline_device_id">Enter your Lifeline device id</string>
+    <string name="helps_you_save_lives">Helps you save lives.</string>
+    <string name="lifeline">Lifeline</string>
 
 </resources>
