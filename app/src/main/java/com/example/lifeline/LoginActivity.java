@@ -41,8 +41,6 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.login_btn)
     MaterialButton loginButton;
 
-    @BindView(R.id.register_btn)
-    MaterialButton registerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,14 +59,14 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        if(dal.getCurrentUser() != null){
-            startNextActivity();
-        }
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        // Check if user is signed in (non-null) and update UI accordingly.
+//        if(dal.getCurrentUser() != null){
+//            startNextActivity();
+//        }
+//    }
 
 //    private void startNextActivity() {
 //        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -130,7 +128,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     void startNextActivity() {
-        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        String email = dal.getCurrentUser().getEmail();
         dal.findUserByEmail(email, wrapper -> {
             Intent intent;
             if (wrapper.success()) {

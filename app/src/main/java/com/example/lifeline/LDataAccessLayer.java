@@ -172,7 +172,9 @@ public class LDataAccessLayer implements DataAccessLayer {
 
     @Override
     public void logout(DataCallback<Void> callback) {
-
+        firebaseAuth.signOut();
+        currentUser = null;
+        callback.onData(DataWrapper.with(null));
     }
 
 
