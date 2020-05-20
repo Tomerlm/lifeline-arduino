@@ -125,4 +125,10 @@ public class MainActivity extends AppCompatActivity implements DataCallback<List
                 .create()
                 .show();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        dal.getAllPatients(this);
+    }
 }

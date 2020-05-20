@@ -2,26 +2,20 @@ package com.example.lifeline;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.example.lifeline.model.BaseModel;
+import com.example.lifeline.model.Connection;
 import com.example.lifeline.model.Patient;
 import com.example.lifeline.model.User;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -29,13 +23,15 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
 import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.Executor;
+import java.util.Map;
+
+import com.google.firebase.firestore.Query.Direction;
 
 
 public class LDataAccessLayer implements DataAccessLayer {
@@ -44,6 +40,7 @@ public class LDataAccessLayer implements DataAccessLayer {
 
     private static final String COLLECTION_USERS = "users";
     private static final String COLLECTION_PATIENTS = "patients";
+    private static final String COLLECTION_CONNECTIONS = "connections";
 
     private static User currentUser = null;
 
@@ -202,7 +199,8 @@ public class LDataAccessLayer implements DataAccessLayer {
                 .addOnSuccessListener(documentReference -> {
                     documentReference.get().addOnSuccessListener(documentSnapshot -> {
                         callback.onData(toObject(documentSnapshot, Patient.class));
-
+                        Connection connection = new Connection(patient.getArduinoID(), 12, false , documentSnapshot.getId(), currentUser.getId());
+                        db.collection(COLLECTION_CONNECTIONS).document(patient.getArduinoID()).set(connection);
                     }).addOnFailureListener(e -> callback.onData(DataWrapper.exception(e)));
 
                 }).addOnFailureListener(e -> callback.onData(DataWrapper.exception(e)));
@@ -211,7 +209,8 @@ public class LDataAccessLayer implements DataAccessLayer {
     @Override
     public void getAllPatients(DataCallback<List<Patient>> callback) {
         List<Patient> items = new ArrayList<>();
-        db.collection(COLLECTION_PATIENTS)
+
+        db.collection(COLLECTION_PATIENTS).orderBy("treatmentStatus", Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -220,6 +219,15 @@ public class LDataAccessLayer implements DataAccessLayer {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                                 Patient patient = document.toObject(Patient.class).withId(document.getId());
+                                boolean cond;
+                                if(!currentUser.isEms()){
+                                    cond = !patient.getDestHospital().equals(currentUser.getHospitalName());
+                                } else {
+                                    cond = !patient.getArduinoID().equals(currentUser.getArduinoID());
+                                }
+                                if(cond){
+                                    break;
+                                }
                                 items.add(patient);
                             }
                             callback.onData(DataWrapper.with(items));
@@ -264,6 +272,43 @@ public class LDataAccessLayer implements DataAccessLayer {
                 .addOnSuccessListener(aVoid -> callback.onData(DataWrapper.with(null)))
                 .addOnFailureListener(err -> callback.onData(DataWrapper.exception(err)));
     }
+
+    @Override
+    public void setTreatmentStatusCompleted(Patient patient, DataCallback<Patient> callback){
+        if(currentUser == null){
+            Log.e(TAG, "Error no user");
+            return;
+        }
+        patient.setTreatmentStatus(Patient.TreatmentStatus.COMPLETED);
+        db.collection(COLLECTION_PATIENTS)
+                .document(patient.getId())
+                .update("treatmentStatus", "COMPLETED")
+                .addOnSuccessListener(aVoid -> callback.onData(DataWrapper.with(patient)))
+                .addOnFailureListener(err -> callback.onData(DataWrapper.exception(err)));
+    }
+
+    @Override
+    public void updatePatientStatus(Patient patient, Patient.Status status, DataCallback<Patient> callback){
+        if(currentUser == null){
+            Log.e(TAG, "Error no user");
+            return;
+        }
+        patient.setStatus(status);
+        db.collection(COLLECTION_PATIENTS)
+                .document(patient.getId())
+                .update("status", status)
+                .addOnSuccessListener(aVoid -> callback.onData(DataWrapper.with(patient)))
+                .addOnFailureListener(err -> callback.onData(DataWrapper.exception(err)));
+    }
+
+@Override
+    public void setManualControl(Connection connection, DataCallback<Patient> callback){
+        db.collection(COLLECTION_CONNECTIONS).document(connection.getArduinoID()).set(connection)
+                .addOnSuccessListener(aVoid -> callback.onData(DataWrapper.with(null)))
+                .addOnFailureListener(err -> callback.onData(DataWrapper.exception(err)));
+    }
+
+
 
 
 }

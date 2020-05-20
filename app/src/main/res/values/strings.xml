@@ -49,5 +49,15 @@
     <string name="enter_your_lifeline_device_id">Enter your Lifeline device id</string>
     <string name="helps_you_save_lives">Helps you save lives.</string>
     <string name="lifeline">Lifeline</string>
+    <string name="condition">Condition:</string>
 
+    <string-array name="patient_status_array">
+        <item>Good</item>
+        <item>Mild</item>
+        <item>Critical</item>
+        <item>Respirated</item>
+        <item>Undetermined</item>
+    </string-array>
 </resources>
+
+

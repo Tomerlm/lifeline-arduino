@@ -1,17 +1,11 @@
 package com.example.lifeline;
 
-import android.content.Context;
-
-import androidx.recyclerview.widget.AsyncListUtil;
-
+import com.example.lifeline.model.Connection;
 import com.example.lifeline.model.Patient;
 import com.example.lifeline.model.User;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.Date;
 import java.util.List;
-
-import io.reactivex.Observable;
 
 public interface DataAccessLayer {
 
@@ -31,4 +25,10 @@ public interface DataAccessLayer {
     public void sendRegistrationTokenToServer(String token, DataCallback<Void> cb);
 
     public void setArduinoID(String arduinoID, DataCallback<User> callback);
+
+    public void setTreatmentStatusCompleted(Patient patient, DataCallback<Patient> callback);
+
+    public void setManualControl(Connection connection, DataCallback<Patient> callback);
+
+    public void updatePatientStatus(Patient patient, Patient.Status status, DataCallback<Patient> callback);
 }

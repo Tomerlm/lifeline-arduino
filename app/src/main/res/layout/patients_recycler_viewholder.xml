@@ -9,32 +9,74 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@color/lightGrey"
+        android:background="@color/dark_white"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:padding="10dp">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/patients_name_text"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:text="Patient0"
-            style="@style/AppTheme.Text.Title"
+            android:text="TomerHaGever"
+            style="@style/AppTheme.Text.Subtitle"
+            android:textSize="19sp"
             android:textColor="@color/black"
-            android:layout_marginLeft="@dimen/generic_screen_horizontal_spacing">
+            android:layout_marginLeft="12dp">
 
         </androidx.appcompat.widget.AppCompatTextView>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/patients_status_text"
-            android:layout_width="wrap_content"
+            android:layout_width="94dp"
             android:layout_height="wrap_content"
-            android:text="On it's way"
+            android:text="Respirated"
+            android:textSize="19sp"
             style="@style/AppTheme.Text.Title"
-            android:textColor="@color/darkGreen"
+            android:textColor="@color/rustyRed"
             android:layout_marginLeft="@dimen/generic_screen_horizontal_spacing">
 
         </androidx.appcompat.widget.AppCompatTextView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/generic_screen_horizontal_spacing">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/patients_treatment_status_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="19sp"
+                android:text="Ongoing"
+                android:layout_marginTop="5dp"
+                style="@style/AppTheme.Text.Title"
+                android:textColor="@color/darkGreen"
+                >
+
+            </androidx.appcompat.widget.AppCompatTextView>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/patients_arduinoid_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="Lifeline ID:"
+                style="@style/AppTheme.Text.Subtitle"
+                android:textColor="@color/black">
+
+            </androidx.appcompat.widget.AppCompatTextView>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/patients_arduinoid_value_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="asvsvd"
+                android:textSize="14sp"
+                style="@style/AppTheme.Text.Subtitle"
+                android:textColor="@color/darkGrey"
+                android:layout_marginLeft="8dp">
+
+            </androidx.appcompat.widget.AppCompatTextView>
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -63,6 +63,30 @@
                 android:textColor="@color/black" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <AutoCompleteTextView
+            android:id="@+id/hostpital_ac_text_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="destination hospital"
+            android:layout_margin="10dp">
+
+        </AutoCompleteTextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/condition"
+            android:layout_margin="@dimen/generic_screen_vertical_spacing"
+            style="@style/AppTheme.Text.Subtitle"/>
+
+        <Spinner
+            android:id="@+id/spinner_patient_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="10dp"
+            />
         <com.google.android.material.button.MaterialButton
             android:id="@+id/add_patient_button"
             android:layout_width="150dp"

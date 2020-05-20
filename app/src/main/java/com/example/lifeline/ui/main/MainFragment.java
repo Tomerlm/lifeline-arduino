@@ -104,7 +104,11 @@ public class MainFragment extends Fragment {
             Patient patient = items.get(position);
 
             holder.patientsNameText.setText(patient.getName());
-            holder.statusText.setText(patient.getStatusText());
+            holder.statusText.setText(Patient.getStatusText(patient.getStatus()));
+            holder.statusText.setTextColor(getColorByStatus(patient.getStatus()));
+            holder.treatmentStatusText.setText(Patient.getTreatmentStatusText(patient.getTreatmentStatus()));
+            holder.treatmentStatusText.setTextColor(getColorByTreatmentStatus(patient.getTreatmentStatus()));
+            holder.lifelineIdText.setText(patient.getArduinoID());
             holder.itemView.setOnClickListener( v -> {
                 startActivity(PatientDetailsActivity.patientDetailIntent(getContext(),items.get(position)));
             });
@@ -116,14 +120,52 @@ public class MainFragment extends Fragment {
         }
     }
 
+    private int getColorByStatus(Patient.Status status) {
+        int color = getResources().getColor(R.color.black);
+        switch (status){
+            case GOOD:
+                color = getResources().getColor(R.color.statusGood);
+                break;
+            case MILD:
+                color = getResources().getColor(R.color.statusMild);
+                break;
+            case CRITICAL:
+                color = getResources().getColor(R.color.statusCritical);
+                break;
+            case RESPIRATED:
+                color = getResources().getColor(R.color.statusRespirated);
+                break;
+            default:
+        }
+        return color;
+    }
+
+    private int getColorByTreatmentStatus (Patient.TreatmentStatus status) {
+        int color = getResources().getColor(R.color.black);
+        switch (status){
+            case ONGOING:
+                color = getResources().getColor(R.color.statusCritical);
+                break;
+            case COMPLETED:
+                color = getResources().getColor(R.color.statusGood);
+                break;
+            default:
+        }
+        return color;
+    }
+
     private class PatientsViewHolder extends RecyclerView.ViewHolder {
         private TextView patientsNameText;
         private TextView statusText;
+        private TextView treatmentStatusText;
+        private TextView lifelineIdText;
 
         private PatientsViewHolder(View itemView) {
             super(itemView);
             patientsNameText = itemView.findViewById(R.id.patients_name_text);
             statusText = itemView.findViewById(R.id.patients_status_text);
+            treatmentStatusText = itemView.findViewById(R.id.patients_treatment_status_text);
+            lifelineIdText =  itemView.findViewById(R.id.patients_arduinoid_value_text);
         }
     }
 

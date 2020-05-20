@@ -12,10 +12,10 @@
     <color name="dark_white">#f5f5f5</color>
     <color name="darkGrey">#757575</color>
 
-    <color name="orderCompleted">#417505</color>
-    <color name="orderCancelled">#d0021b</color>
-    <color name="orderPending">#defeb12f</color>
-    <color name="orderInProgress">#d89204</color>
+    <color name="statusGood">#417505</color>
+    <color name="statusCritical">#d0021b</color>
+    <color name="statusMild">#defeb12f</color>
+    <color name="statusRespirated">#0767A8</color>
 
     <color name="rustyRed">#bf360c</color>
     <color name="darkishGreen">#2e7d32</color>
