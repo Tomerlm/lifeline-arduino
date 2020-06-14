@@ -15,6 +15,7 @@ admin.initializeApp();
 const PATIENTS_COLLECTION = "patients";
 const USERS_COLLECTION = "users";
 const CONNECTIONS_COLLECTION = "connections";
+const SENSORS_COLLECTION = "sensors";
 
 exports.getConnectionDetails = functions.https.onRequest(async (req, res) => {
   const ardID = req.query.arduinoID as string;
@@ -23,6 +24,29 @@ exports.getConnectionDetails = functions.https.onRequest(async (req, res) => {
     .firestore()
     .collection(CONNECTIONS_COLLECTION)
     .doc(ardID)
+    .get()
+    .then((doc: any) => {
+      if (!doc.exists) {
+        console.log("No such document!");
+      } else {
+        console.log("Document data:", doc.data());
+        data = doc.data();
+        res.json({ data });
+      }
+    })
+    .catch((err: any) => {
+      console.log("Error getting document", err);
+      res.json({ err });
+    });
+});
+
+exports.getPatient = functions.https.onRequest(async (req, res) => {
+  const id = req.query.patientID as string;
+  let data: any;
+  await admin
+    .firestore()
+    .collection(PATIENTS_COLLECTION)
+    .doc(id)
     .get()
     .then((doc: any) => {
       if (!doc.exists) {
@@ -53,6 +77,19 @@ exports.updatePatientParameters = functions.https.onRequest(
     res.json({ result: writeResult });
   }
 );
+
+exports.updateSensor = functions.https.onRequest(async (req, res) => {
+  const bpm = parseInt(req.query.bpm as any);
+  const oxi = parseInt(req.query.oxi as any);
+  const sensorID = "sensor";
+
+  const writeResult = await admin
+    .firestore()
+    .collection(SENSORS_COLLECTION)
+    .doc(sensorID)
+    .update({ bpm: bpm, oxygenPercentage: oxi });
+  res.json({ result: writeResult });
+});
 
 exports.createHospitals = functions.https.onRequest(async (req, res) => {
   /*
